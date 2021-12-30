@@ -1,9 +1,15 @@
 import { useState } from 'react';
+
 import { Card } from './shared/Card';
 import { Button } from './shared/Button';
 import { RatingSelect } from './RatingSelect';
+import { Feedback } from '../data/FeedbackData';
 
-export const FeedbackForm = () => {
+type FeedbackFormProps = {
+  handleSubmit: (newFeedback: Feedback) => void;
+};
+
+export const FeedbackForm = ({ handleSubmit }: FeedbackFormProps) => {
   const [text, setText] = useState('');
   const [rating, setRating] = useState();
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
@@ -22,9 +28,18 @@ export const FeedbackForm = () => {
     }
     setText(e.target.value);
   };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newFeedback: Feedback = { id: new Date().valueOf(), text, rating };
+    handleSubmit(newFeedback);
+    setText('');
+  };
+
   return (
     <Card>
-      <form>
+      <form onSubmit={onSubmit}>
         <h2>Please rate our service</h2>
         <RatingSelect select={(rating: number) => setRating(rating)} />
         <div className="input-group">
