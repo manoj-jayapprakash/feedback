@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { FeedbackList } from './components/FeedbackList';
 import { Header } from './components/Header';
+import { FeedbackStats } from './components/FeedbackStats';
+import { FeedbackList } from './components/FeedbackList';
 import { Feedback, FeedbackData } from './data/FeedbackData';
 
 function App() {
@@ -12,13 +13,16 @@ function App() {
       setFeedback(feedback.filter((item: Feedback) => item.id !== id));
   };
   return (
-    <div className="app container">
+    <div className="app">
       <Header
         text="Feedback UI"
         bgColor="rgba(0, 0, 0, 0.4)"
         textColor="#ff6a95"
       />
-      <FeedbackList feedbacks={feedback} handleDelete={deleteFeedback} />
+      <div className="container">
+        <FeedbackStats feedback={feedback} />
+        <FeedbackList feedbacks={feedback} handleDelete={deleteFeedback} />
+      </div>
     </div>
   );
 }
