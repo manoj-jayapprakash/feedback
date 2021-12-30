@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import { Card } from './shared/Card';
 import { Button } from './shared/Button';
 import { RatingSelect } from './RatingSelect';
 import { Feedback } from '../data/FeedbackData';
 
-type FeedbackFormProps = {
-  handleSubmit: (newFeedback: Feedback) => void;
-};
+import { FeedbackContext } from '../context/FeedbackContext';
 
-export const FeedbackForm = ({ handleSubmit }: FeedbackFormProps) => {
+export const FeedbackForm = () => {
   const [text, setText] = useState('');
   const [rating, setRating] = useState();
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
+
+  const { addFeedback } = useContext(FeedbackContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (text === '') {
@@ -33,7 +33,7 @@ export const FeedbackForm = ({ handleSubmit }: FeedbackFormProps) => {
     e.preventDefault();
 
     const newFeedback: Feedback = { id: new Date().valueOf(), text, rating };
-    handleSubmit(newFeedback);
+    addFeedback(newFeedback);
     setText('');
   };
 

@@ -1,25 +1,17 @@
-import { Feedback } from '../data/FeedbackData';
+import { useContext } from 'react';
+
+import { FeedbackContext } from '../context/FeedbackContext';
 import { FeedbackItem } from '../components/FeedbackItem';
 
-type FeedbackListProps = {
-  feedbacks: Feedback[];
-  handleDelete: (id: number) => void;
-};
+export const FeedbackList = (): JSX.Element => {
+  const { feedback } = useContext(FeedbackContext);
 
-export const FeedbackList = ({
-  feedbacks,
-  handleDelete,
-}: FeedbackListProps): JSX.Element => {
-  if (!feedbacks || feedbacks.length === 0) return <p>No Feedback Yet!</p>;
+  if (!feedback || feedback.length === 0) return <p>No Feedback Yet!</p>;
 
   return (
     <div className="feedback-list">
-      {feedbacks.map((item) => (
-        <FeedbackItem
-          feedbackItem={item}
-          key={item.id}
-          handleDelete={handleDelete}
-        />
+      {feedback.map((item) => (
+        <FeedbackItem feedbackItem={item} key={item.id} />
       ))}
     </div>
   );
