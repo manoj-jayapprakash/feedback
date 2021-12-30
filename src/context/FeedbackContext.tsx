@@ -1,25 +1,12 @@
 import { useState, createContext } from 'react';
 import { Feedback } from '../data/FeedbackData';
+
+import { FeedbackData } from '../data/FeedbackData';
+
 export const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
-  const [feedback, setFeedback] = useState([
-    {
-      id: 1,
-      rating: 10,
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.',
-    },
-    {
-      id: 2,
-      rating: 9,
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.',
-    },
-    {
-      id: 3,
-      rating: 8,
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.',
-    },
-  ]);
+  const [feedback, setFeedback] = useState(FeedbackData);
 
   const addFeedback = (newFeedback: Feedback) => {
     setFeedback([newFeedback, ...feedback]);
