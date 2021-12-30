@@ -1,10 +1,10 @@
 import { Feedback } from '../data/FeedbackData';
 
 type FeedbackStatsProps = {
-  feedback: Feedback;
+  feedback: Feedback[];
 };
 
-export const FeedbackStats = ({ feedback }) => {
+export const FeedbackStats = ({ feedback }: FeedbackStatsProps) => {
   let average = (
     feedback.reduce((acc, cur) => {
       return acc + cur.rating;
